@@ -5,9 +5,9 @@ language: java
 jdk:
   - openjdk12
 before_script:
-  - docker pull
+  - docker run -d --name keyvaluestore-pg -e POSTGRES_PASSWORD=testivilinsalasana -e POSTGRES_DB=keyvalue -p 5432:5432 postgres:11.5-alpine
 after_script:
-  - docker stop 
+  - docker stop
 install: ./gradlew assemble
 script: ./gradlew build
 before_cache:
