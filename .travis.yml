@@ -5,11 +5,11 @@ language: java
 jdk:
   - openjdk12
 before_script:
-  - docker run -d --name keyvaluestore-pg -e POSTGRES_PASSWORD=testivilinsalasana -e POSTGRES_DB=keyvalue -p 5432:5432 postgres:11.5-alpine
-after_script:
-  - docker stop
-install: ./gradlew assemble
+  - docker run -d --name keyvaluestore-test-pg -e POSTGRES_PASSWORD=testivilinsalasana -e POSTGRES_DB=keyvalue -p 5432:5432 postgres:11.5-alpine
 script: ./gradlew build
+after_script:
+  - docker stop keyvaluestore-test-pg
+install: ./gradlew assemble
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
