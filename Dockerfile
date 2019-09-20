@@ -1,8 +1,10 @@
 FROM openjdk:12 AS builder
 WORKDIR /app
+
 COPY build.gradle settings.gradle gradlew ./
 COPY gradle ./gradle
-RUN ./gradlew clean compileJava compileTestJava || return 0
+RUN ./gradlew dependencies || return 0
+
 COPY . .
 RUN ./gradlew bootJar
 
