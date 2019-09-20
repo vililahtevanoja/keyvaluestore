@@ -1,0 +1,13 @@
+version: '3'
+services:
+  api: # service named `api`
+    build: . # run `docker build` with argument `.` -> `docker build .` in this directory
+    ports:
+      - "8080:8080" # bind port 8080 inside container to port 8080 in host
+    depends_on:
+    - database # api depends on database, so database-container is started before api-container
+  database: # service named `database`
+    image: postgres:11.5 # format <repository>:<tag>
+    environment: # set environment variables for the container
+      POSTGRES_DB: keyvalue
+      POSTGRES_PASSWORD: testivilinsalasana

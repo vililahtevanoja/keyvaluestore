@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS key_value (
+    id SERIAL PRIMARY KEY,
+    key VARCHAR(128) UNIQUE NOT NULL,
+    value TEXT
+);
