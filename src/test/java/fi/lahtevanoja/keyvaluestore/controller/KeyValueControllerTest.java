@@ -58,7 +58,7 @@ public class KeyValueControllerTest extends KeyValueStoreIntegrationTest {
       .readValue(result.getResponse().getContentAsByteArray(), new TypeReference<List<KeyValue>>() {
       });
     assertThat(keyValues)
-      .hasSize(2)
+      .hasSize(1)
       .anyMatch(kv -> KeyValue.areEqual(kv, kv1))
       .anyMatch(kv -> KeyValue.areEqual(kv, kv2));
   }
