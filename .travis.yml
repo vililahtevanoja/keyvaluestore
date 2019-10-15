@@ -9,12 +9,47 @@ install: ./gradlew assemble
 before_script:
   - docker run -d --name keyvaluestore-test-pg -e POSTGRES_PASSWORD=testivilinsalasana -e POSTGRES_DB=keyvalue -p 5432:5432 postgres:11.5-alpine
 script:
+  - set -e
   - ./gradlew build
   - docker build .
 after_script:
   - docker stop keyvaluestore-test-pg
 
+# Azure Web Apps
+#deploy:
+#  provider: azure_web_apps
+#  username: azure_deployment_user       # If AZURE_WA_USERNAME isn't set
+#  password: azure_deployment_password   # If AZURE_WA_PASSWORD isn't set
+#  site: azure_deployment_sitename       # If AZURE_WA_SITE isn't set
+#  slot: azure_deployment_slotname       # (optional) If AZURE_WA_SLOT isn't set
 
+# AWS CodeDeploy
+#deploy:
+#  - provider: s3
+#      # rest of S3 deployment for MyApp.zip
+#      # ⋮
+#      - provider: codedeploy
+#        access_key_id: "YOUR AWS ACCESS KEY"
+#        secret_access_key: "YOUR AWS SECRET KEY"
+#        bucket: "S3 Bucket"
+#        key: latest/MyApp.zip
+#        application: MyApp
+#        deployment_group: MyDeploymentGroup
+
+# Heroku
+#deploy:
+#  provider: heroku
+#  api_key: <apikeyhere>
+#  app: my-app-123
+
+# Custom script
+#deploy:
+#  provider: script
+#  script: bash scripts/deploy.sh
+#  on:
+#    branch: develop
+
+# Gradle caching things
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
